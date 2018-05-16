@@ -1,0 +1,8 @@
+{
+  "name": "WikUp",
+  "app_id": "b1c54fce",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
+}
