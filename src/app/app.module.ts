@@ -11,6 +11,7 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import {Pro} from "@ionic/pro";
+import { UserProvider } from '../providers/user/user';
 
 
 Pro.init('b1c54fce', {
@@ -63,7 +64,8 @@ export class MyErrorHandler implements ErrorHandler {
     SplashScreen,
     IonicErrorHandler,
     [{ provide: ErrorHandler, useClass: MyErrorHandler }],
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    UserProvider
   ]
 })
 export class AppModule {}
