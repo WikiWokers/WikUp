@@ -2,6 +2,8 @@ import {Component} from '@angular/core';
 import {NavController, ToastController} from "ionic-angular";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {UserProvider} from "../../providers/user/user";
+import {ContactPage} from "../contact/contact";
+import {RegisterPage} from "../register/register";
 
 @Component({
     selector: 'login',
@@ -23,11 +25,10 @@ export class HomePage {
         this.loginForm = this.formBuilder.group({
             email: ['', Validators.compose([
                 Validators.required,
-                Validators.email
             ])],
             password: ['', Validators.compose([
                 Validators.required,
-                Validators.minLength(8)
+                Validators.minLength(4)
             ])]
         });
     }
@@ -48,6 +49,6 @@ export class HomePage {
     }
 
     openSigninPage() {
-        //this.navCtrl.push();
+        this.navCtrl.push(RegisterPage);
     }
 }
