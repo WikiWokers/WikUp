@@ -1,18 +1,49 @@
-<!--
-  Generated template for the RegisterPage page.
+<ion-content>
+    <h1 padding>Registro</h1>
 
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
-<ion-header>
+    <div class="container">
+        <form [formGroup]="registerForm">
 
-  <ion-navbar>
-    <ion-title>Register</ion-title>
-  </ion-navbar>
+            <ion-item>
+                <ion-label floating>Nombre de usuario</ion-label>
+                <ion-input [(ngModel)]="username" formControlName="username" type="text"></ion-input>
+            </ion-item>
+            <ion-item *ngIf="registerForm.controls.username.hasError('required') && registerForm.controls.username.touched">
+                <p>Campo obligatorio</p>
+            </ion-item>
 
-</ion-header>
+            <ion-item>
+                <ion-label floating>Correo</ion-label>
+                <ion-input [(ngModel)]="email" formControlName="email" type="email"></ion-input>
+            </ion-item>
+            <ion-item *ngIf="registerForm.controls.email.hasError('required') && registerForm.controls.email.touched">
+                <p>Campo obligatorio</p>
+            </ion-item>
+            <ion-item *ngIf="registerForm.controls.email.hasError('email') && registerForm.controls.email.touched">
+                <p>El correo introducido no es correcto</p>
+            </ion-item>
 
+            <ion-item>
+                <ion-label floating>Contraseña</ion-label>
+                <ion-input [(ngModel)]="password" formControlName="password" type="password"></ion-input>
+            </ion-item>
+            <ion-item *ngIf="registerForm.controls.password.hasError('required') && registerForm.controls.password.touched">
+                <p>Campo obligatorio</p>
+            </ion-item>
 
-<ion-content padding>
+            <ion-item>
+                <ion-label floating>Escribe de nuevo la contraseña</ion-label>
+                <ion-input [(ngModel)]="retype" formControlName="retype" type="password"></ion-input>
+            </ion-item>
+            <ion-item *ngIf="registerForm.controls.retype.hasError('required') && registerForm.controls.retype.touched">
+                <p>Campo obligatorio</p>
+            </ion-item>
 
+        </form>
+
+        <div padding>
+            <button ion-button color="primary" block [disabled]="!registerForm.valid" (click)="register()">Crear cuenta</button>
+        </div>
+
+    </div>
 </ion-content>

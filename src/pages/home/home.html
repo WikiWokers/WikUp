@@ -1,19 +1,15 @@
 <ion-content>
     <h1 padding>App de teléfonica o algo</h1>
 
-    <!-- Importar bootstrap 4 -->
     <div class="container">
         <h2 padding>Accede o regístrate</h2>
         <form [formGroup]="loginForm">
             <ion-item>
-                <ion-label floating>Correo</ion-label>
-                <ion-input [(ngModel)]="email" formControlName="email" type="email"></ion-input>
+                <ion-label floating>Nombre de usuario</ion-label>
+                <ion-input [(ngModel)]="username" formControlName="username" type="text"></ion-input>
             </ion-item>
-            <ion-item *ngIf="loginForm.controls.email.hasError('required') && loginForm.controls.email.touched">
-                <p>No se olvide de completar este campo!</p>
-            </ion-item>
-            <ion-item *ngIf="loginForm.controls.email.hasError('email') && loginForm.controls.email.touched">
-                <p>El correo introducido no es correcto</p>
+            <ion-item *ngIf="loginForm.controls.username.hasError('required') && loginForm.controls.username.touched">
+                <p>Campo obligatorio</p>
             </ion-item>
 
             <ion-item>
@@ -21,7 +17,7 @@
                 <ion-input [(ngModel)]="password" formControlName="password" type="password"></ion-input>
             </ion-item>
             <ion-item *ngIf="loginForm.controls.password.hasError('required') && loginForm.controls.password.touched">
-                <p>No se olvide de completar este campo!</p>
+                <p>Campo obligatorio</p>
             </ion-item>
         </form>
 

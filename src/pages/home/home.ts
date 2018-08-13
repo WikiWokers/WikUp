@@ -11,7 +11,7 @@ import {RegisterPage} from "../register/register";
 })
 export class HomePage {
     password: string;
-    email: string;
+    username: string;
     loginForm: FormGroup;
 
     constructor(public navCtrl: NavController,
@@ -23,7 +23,7 @@ export class HomePage {
 
     private addInputValidators() {
         this.loginForm = this.formBuilder.group({
-            email: ['', Validators.compose([
+            username: ['', Validators.compose([
                 Validators.required,
             ])],
             password: ['', Validators.compose([
@@ -34,15 +34,15 @@ export class HomePage {
     }
 
     login() {
-        this.userProvider.login(this.email, this.password)
-            //.then(() => this.email = this.password = '')
-            //.catch((error) => this.showWarning(error));
+        this.userProvider.login(this.username, this.password)
+            .then(() => this.username = this.password = '')
+            .catch((error) => this.showWarning(error));
     }
 
     private showWarning(message: string) {
         let toast = this.toastCtrl.create({
             message: message,
-            duration: 10000,
+            duration: 5000,
             position: 'top'
         });
         toast.present();

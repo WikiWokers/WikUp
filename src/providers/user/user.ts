@@ -15,13 +15,30 @@ export class UserProvider {
 
     login(email: string, password: string) {
         console.log('email: ', email, 'password: ', password);
+        return new Promise(function (resolve, reject) {
+            loginPromise(email, password)
+                .then((response) => {
+                    if (response.clientlogin.status == "PASS") {
+                        resolve("Logueo correcto");
+                    } else {
+                        reject(response.clientlogin.message);
+                    }
+                })
+                .catch((err) => {
+                    reject(err);
+                });
+        });
+    }
 
-        loginPromise(email, password)
+    register(username: string, email: string, password: string, retype: string) {
+        console.log('username: ', username, 'email: ', email, 'password: ', password, 'retype: ', retype);
+
+        createAccount(username, email, password, retype)
             .then((response) => {
-                if (response.clientlogin.status == "PASS") {
-                    console.log("Logueo correcto");
+                if (response.createaccount.status == "PASS") {
+                    console.log("Registro correcto");
                 } else {
-                    console.log("Usuario o contraseña incorrectos");
+                    console.log("Error:"+response.createaccount.message);
                 }
             })
             .catch((err) => {
@@ -33,7 +50,7 @@ export class UserProvider {
 
 function loginPromise(email: string, password: string) {
     return new Promise(function (resolve, rejected) {
-        getLoginToken().then((logintoken) => {
+        getToken('login').then((logintoken) => {
             let plus = "%2B";
             let backslash = "%5C";
             let slash = "%2F";
@@ -62,10 +79,42 @@ function loginPromise(email: string, password: string) {
     });
 }
 
+function createAccount(username: string, email: string, password: string, retype: string) {
+    return new Promise(function (resolve, rejected) {
+        getToken('createaccount').then((createaccounttoken) => {
+            let plus = "%2B";
+            let backslash = "%5C";
+            let slash = "%2F";
+            let colon = "%3A";
+            createaccounttoken = createaccounttoken.toString().substring(0, createaccounttoken.toString().length - 2)+plus+backslash;
+            let params = "username=" + username +
+                "&email=" + email +
+                "&password=" + password +
+                "&retype=" + retype +
+                "&createtoken=" + createaccounttoken +
+                "&createreturnurl=https"+colon+slash+slash+"www.mediawiki.org";
+            fetch('https://www.mediawiki.org/w/api.php?action=createaccount&format=json',
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/x-www-form-urlencoded"
+                    },
+                    body: params
+                })
+                .then((response) => {
+                    resolve(response.json());
+                })
+                .catch((error) => {
+                    rejected(error);
+                })
+        });
+    });
+}
+
 //TODO cuando no tiene conexión, controlar el error del fetch
-function getLoginToken() {
+function getToken(type: string) {
     return new Promise(function (resolve, reject) {
-        fetch('https://www.mediawiki.org/w/api.php?action=query&meta=tokens&type=login&format=json')
+        fetch('https://www.mediawiki.org/w/api.php?action=query&meta=tokens&type='+type+'&format=json')
             .then(function (response) {
                 if (response.status.toString() != "200") {
                     reject("Inténtelo más tarde");
@@ -76,7 +125,7 @@ function getLoginToken() {
                 reject(err);
             })
             .then(function (myJson) {
-                resolve(myJson.query.tokens.logintoken);
+                resolve(myJson.query.tokens[type+'token']);
             });
     });
 }
