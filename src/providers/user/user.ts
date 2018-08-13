@@ -18,6 +18,7 @@ export class UserProvider {
         return new Promise(function (resolve, reject) {
             loginPromise(email, password)
                 .then((response) => {
+                    //TODO revisar esta cosa
                     if (response.clientlogin.status == "PASS") {
                         resolve("Logueo correcto");
                     } else {
@@ -35,6 +36,7 @@ export class UserProvider {
 
         createAccount(username, email, password, retype)
             .then((response) => {
+                //TODO revisar esta cosa
                 if (response.createaccount.status == "PASS") {
                     console.log("Registro correcto");
                 } else {
