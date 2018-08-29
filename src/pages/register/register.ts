@@ -1,11 +1,11 @@
-import { Component } from '@angular/core';
-import {IonicPage, NavController, NavParams, ToastController} from 'ionic-angular';
+import {Component} from '@angular/core';
+import {NavController, ToastController} from 'ionic-angular';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {UserProvider} from "../../providers/user/user";
 
 @Component({
-  selector: 'page-register',
-  templateUrl: 'register.html',
+    selector: 'page-register',
+    templateUrl: 'register.html',
 })
 export class RegisterPage {
     registerForm: FormGroup;

@@ -2,7 +2,6 @@ import {Component} from '@angular/core';
 import {NavController, ToastController} from "ionic-angular";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {UserProvider} from "../../providers/user/user";
-import {ContactPage} from "../contact/contact";
 import {RegisterPage} from "../register/register";
 
 @Component({
@@ -19,6 +18,7 @@ export class HomePage {
                 private toastCtrl: ToastController,
                 private userProvider: UserProvider) {
         this.addInputValidators();
+
     }
 
     private addInputValidators() {
@@ -35,7 +35,9 @@ export class HomePage {
 
     login() {
         this.userProvider.login(this.username, this.password)
-            .then(() => this.username = this.password = '')
+            .then(() => {
+                this.username = this.password = '';
+            })
             .catch((error) => this.showWarning(error));
     }
 

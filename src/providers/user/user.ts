@@ -13,6 +13,17 @@ export class UserProvider {
         console.log('Hello UserProvider Provider');
     }
 
+    userID(){
+        const URL = 'https://www.mediawiki.org/w/api.php?action=query&meta=userinfo&format=json&uiprop=blockinfo%7Chasmsg%7Cgroups%7Cgroupmemberships%7Cimplicitgroups%7Crights%7Cchangeablegroups%7Coptions%7Ceditcount%7Cratelimits%7Cemail%7Crealname%7Cacceptlang%7Cregistrationdate%7Cunreadcount%7Ccentralids';
+        return new Promise(function (resolve, reject) {
+            fetch(URL).then((response) => {
+                response.json().then(res => resolve(res.query.userinfo.id));
+            }).catch((error) => {
+                reject(error);
+            });
+        });
+    }
+
     login(email: string, password: string) {
         console.log('email: ', email, 'password: ', password);
         return new Promise(function (resolve, reject) {
@@ -20,6 +31,8 @@ export class UserProvider {
                 .then((response) => {
                     //TODO revisar esta cosa
                     if (response.clientlogin.status == "PASS") {
+                        console.log(response);
+                        localStorage.setItem('user','');
                         resolve("Logueo correcto");
                     } else {
                         reject(response.clientlogin.message);
@@ -72,7 +85,7 @@ function loginPromise(email: string, password: string) {
                     body: params
                 })
                 .then((response) => {
-                    resolve(response.json());
+                    response.json().then(json => resolve(json));
                 })
                 .catch((error) => {
                     rejected(error);
@@ -104,7 +117,8 @@ function createAccount(username: string, email: string, password: string, retype
                     body: params
                 })
                 .then((response) => {
-                    resolve(response.json());
+                    response.json().then(json => resolve(json));
+
                 })
                 .catch((error) => {
                     rejected(error);

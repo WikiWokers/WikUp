@@ -14,6 +14,8 @@ import {Pro} from "@ionic/pro";
 import {UserProvider} from '../providers/user/user';
 import {RegisterPage} from "../pages/register/register";
 
+import { Geolocation } from '@ionic-native/geolocation';
+
 
 Pro.init('b1c54fce', {
     appVersion: '0.0.1'
@@ -68,7 +70,8 @@ export class MyErrorHandler implements ErrorHandler {
         IonicErrorHandler,
         [{provide: ErrorHandler, useClass: MyErrorHandler}],
         {provide: ErrorHandler, useClass: IonicErrorHandler},
-        UserProvider
+        UserProvider,
+        Geolocation
     ]
 })
 export class AppModule {
