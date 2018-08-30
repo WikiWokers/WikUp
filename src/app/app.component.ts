@@ -8,6 +8,7 @@ import {AboutPage} from "../pages/about/about";
 import {HomePage} from "../pages/home/home";
 import {UserProvider} from "../providers/user/user";
 import {ContactPage} from "../pages/contact/contact";
+import {MapPage} from "../pages/map/map";
 
 @Component({
     templateUrl: 'app.html'
@@ -23,7 +24,7 @@ export class MyApp {
             splashScreen.hide();
             userProvider.userID().then((ID) => {
                 if(ID == 0) this.rootPage = HomePage;
-                else this.rootPage = ContactPage
+                else this.rootPage = MapPage
             });
         });
     }
