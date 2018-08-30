@@ -4,10 +4,8 @@ import {StatusBar} from '@ionic-native/status-bar';
 import {SplashScreen} from '@ionic-native/splash-screen';
 
 import {TabsPage} from '../pages/tabs/tabs';
-import {AboutPage} from "../pages/about/about";
 import {HomePage} from "../pages/home/home";
 import {UserProvider} from "../providers/user/user";
-import {ContactPage} from "../pages/contact/contact";
 import {MapPage} from "../pages/map/map";
 
 @Component({
@@ -22,6 +20,7 @@ export class MyApp {
             // Here you can do any higher level native things you might need.
             statusBar.styleDefault();
             splashScreen.hide();
+            // TODO this only redirect when open the app not after login
             userProvider.userID().then((ID) => {
                 if(ID == 0) this.rootPage = HomePage;
                 else this.rootPage = MapPage
