@@ -1,11 +1,5 @@
 import {Injectable} from '@angular/core';
 
-/*
-  Generated class for the UserProvider provider.
-
-  See https://angular.io/guide/dependency-injection for more info on providers
-  and Angular DI.
-*/
 @Injectable()
 export class UserProvider {
 
@@ -29,13 +23,12 @@ export class UserProvider {
         return new Promise(function (resolve, reject) {
             loginPromise(email, password)
                 .then((response) => {
-                    //TODO revisar esta cosa
-                    if (response.clientlogin.status == "PASS") {
+                    if (response['clientlogin']['status'] == "PASS") {
                         console.log(response);
                         localStorage.setItem('user','');
                         resolve("Logueo correcto");
                     } else {
-                        reject(response.clientlogin.message);
+                        reject(response['clientlogin']['message']);
                     }
                 })
                 .catch((err) => {
@@ -49,11 +42,10 @@ export class UserProvider {
 
         createAccount(username, email, password, retype)
             .then((response) => {
-                //TODO revisar esta cosa
-                if (response.createaccount.status == "PASS") {
+                if (response['createaccount']['status'] == "PASS") {
                     console.log("Registro correcto");
                 } else {
-                    console.log("Error:"+response.createaccount.message);
+                    console.log("Error:" + response['createaccount']['message']);
                 }
             })
             .catch((err) => {
