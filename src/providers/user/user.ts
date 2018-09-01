@@ -19,17 +19,10 @@ export class UserProvider {
     }
 
     login(email: string, password: string) {
-        console.log('email: ', email, 'password: ', password);
         return new Promise(function (resolve, reject) {
             loginPromise(email, password)
                 .then((response) => {
-                    if (response['clientlogin']['status'] == "PASS") {
-                        console.log(response);
-                        localStorage.setItem('user','');
-                        resolve("Logueo correcto");
-                    } else {
-                        reject(response['clientlogin']['message']);
-                    }
+                    resolve(response['clientlogin']['status']);
                 })
                 .catch((err) => {
                     reject(err);

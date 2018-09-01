@@ -36,9 +36,15 @@ export class LoginPage {
 
     login() {
         this.userProvider.login(this.username, this.password)
-            .then(() => {
-                this.username = this.password = '';
-                this.navCtrl.setRoot(TabsPage);
+            .then((response) => {
+                if (response == "PASS") {
+                    this.username = this.password = '';
+                    this.navCtrl.setRoot(TabsPage);
+                } else {
+                    //todo hold this, the response send only the status if you want to get
+                    //message have to change the resolve method
+                    // console.log(response['clientlogin']['message']);
+                }
             })
             .catch((error) => this.showWarning(error));
     }

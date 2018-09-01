@@ -19,7 +19,6 @@ export class MyApp {
             // Here you can do any higher level native things you might need.
             statusBar.styleDefault();
             splashScreen.hide();
-            // TODO this only redirect when open the app not after login
             userProvider.userID().then((ID) => {
                 if (ID == 0) this.rootPage = LoginPage;
                 else this.rootPage = TabsPage;
