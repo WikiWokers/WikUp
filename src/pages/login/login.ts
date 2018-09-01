@@ -1,9 +1,10 @@
 import {Component} from '@angular/core';
 import {NavController, ToastController} from 'ionic-angular';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormGroup} from "@angular/forms";
 import {UserProvider} from "../../providers/user/user";
 import {RegisterPage} from "../register/register";
 import {TabsPage} from "../tabs/tabs";
+import {InputValidatorProvider} from "../../providers/input-validator/input-validator";
 
 @Component({
     selector: 'page-login',
@@ -17,20 +18,17 @@ export class LoginPage {
     constructor(public navCtrl: NavController,
                 private formBuilder: FormBuilder,
                 private toastCtrl: ToastController,
-                private userProvider: UserProvider) {
+                private userProvider: UserProvider,
+                private inputValidator: InputValidatorProvider) {
         this.addInputValidators();
 
     }
 
     private addInputValidators() {
+
         this.loginForm = this.formBuilder.group({
-            username: ['', Validators.compose([
-                Validators.required,
-            ])],
-            password: ['', Validators.compose([
-                Validators.required,
-                Validators.minLength(4)
-            ])]
+            username: this.inputValidator.username,
+            password: this.inputValidator.password
         });
     }
 

@@ -17,6 +17,7 @@ import {RegisterPage} from "../pages/register/register";
 import {Geolocation} from '@ionic-native/geolocation';
 import {MapPage} from "../pages/map/map";
 import {LoginPage} from "../pages/login/login";
+import {InputValidatorProvider} from '../providers/input-validator/input-validator';
 
 
 Pro.init('b1c54fce', {
@@ -77,7 +78,8 @@ export class MyErrorHandler implements ErrorHandler {
         [{provide: ErrorHandler, useClass: MyErrorHandler}],
         {provide: ErrorHandler, useClass: IonicErrorHandler},
         UserProvider,
-        Geolocation
+        Geolocation,
+        InputValidatorProvider
     ]
 })
 export class AppModule {
