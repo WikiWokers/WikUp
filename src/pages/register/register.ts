@@ -1,8 +1,8 @@
 import {Component} from '@angular/core';
 import {NavController, ToastController} from 'ionic-angular';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormGroup} from "@angular/forms";
 import {UserProvider} from "../../providers/user/user";
-import {resolveDefinition} from "../../../node_modules/@angular/core/src/view/util";
+import {InputValidatorProvider} from "../../providers/input-validator/input-validator";
 
 @Component({
     selector: 'page-register',
@@ -18,26 +18,17 @@ export class RegisterPage {
     constructor(public navCtrl: NavController,
                 private formBuilder: FormBuilder,
                 private toastCtrl: ToastController,
-                private userProvider: UserProvider) {
+                private userProvider: UserProvider,
+                private inputValidator: InputValidatorProvider) {
         this.addInputValidators();
     }
 
     private addInputValidators() {
         this.registerForm = this.formBuilder.group({
-            username: ['', Validators.compose([
-                Validators.required,
-            ])],
-            email: ['', Validators.compose([
-                Validators.required,
-            ])],
-            password: ['', Validators.compose([
-                Validators.required,
-                Validators.minLength(4)
-            ])],
-            retype: ['', Validators.compose([
-                Validators.required,
-                Validators.minLength(4)
-            ])]
+            username: this.inputValidator.username,
+            email: this.inputValidator.email,
+            password: this.inputValidator.password,
+            retype: this.inputValidator.password
         });
     }
 

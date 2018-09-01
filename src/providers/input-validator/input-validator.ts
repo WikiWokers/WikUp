@@ -19,4 +19,10 @@ export class InputValidatorProvider {
             Validators.minLength(4)
         ])]
     }
+
+    get email() {
+        return ['', Validators.compose([
+            Validators.required,
+        ])];
+    }
 }
