@@ -1,35 +1,3 @@
 <ion-content>
-    <h1 padding>App de teléfonica o algo</h1>
-
-    <div class="container">
-        <h2 padding>Accede o regístrate</h2>
-        <form [formGroup]="loginForm">
-            <ion-item>
-                <ion-label floating>Nombre de usuario</ion-label>
-                <ion-input [(ngModel)]="username" formControlName="username" type="text"></ion-input>
-            </ion-item>
-            <ion-item *ngIf="loginForm.controls.username.hasError('required') && loginForm.controls.username.touched">
-                <p>Campo obligatorio</p>
-            </ion-item>
-
-            <ion-item>
-                <ion-label floating>Contraseña</ion-label>
-                <ion-input [(ngModel)]="password" formControlName="password" type="password"></ion-input>
-            </ion-item>
-            <ion-item *ngIf="loginForm.controls.password.hasError('required') && loginForm.controls.password.touched">
-                <p>Campo obligatorio</p>
-            </ion-item>
-        </form>
-
-        <div padding>
-            <button ion-button color="primary" block [disabled]="!loginForm.valid" (click)="login()">Iniciar sesión
-            </button>
-
-            <p></p>
-
-            <button ion-button color="secondary" block (click)="openSigninPage()">Crear cuenta</button>
-        </div>
-
-        <!-- Poner aquí enlace para registro -->
-    </div>
+    <h1 padding>Home</h1>
 </ion-content>
