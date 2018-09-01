@@ -1,4 +1,5 @@
 import {Injectable} from '@angular/core';
+import {Pro} from "@ionic/pro";
 
 @Injectable()
 export class UserProvider {
@@ -7,7 +8,7 @@ export class UserProvider {
         console.log('Hello UserProvider Provider');
     }
 
-    userID(){
+    userID() {
         const URL = 'https://www.mediawiki.org/w/api.php?action=query&meta=userinfo&format=json&uiprop=blockinfo%7Chasmsg%7Cgroups%7Cgroupmemberships%7Cimplicitgroups%7Crights%7Cchangeablegroups%7Coptions%7Ceditcount%7Cratelimits%7Cemail%7Crealname%7Cacceptlang%7Cregistrationdate%7Cunreadcount%7Ccentralids';
         return new Promise(function (resolve, reject) {
             fetch(URL).then((response) => {
@@ -31,20 +32,16 @@ export class UserProvider {
     }
 
     register(username: string, email: string, password: string, retype: string) {
-        console.log('username: ', username, 'email: ', email, 'password: ', password, 'retype: ', retype);
-
-        createAccount(username, email, password, retype)
-            .then((response) => {
-                if (response['createaccount']['status'] == "PASS") {
-                    console.log("Registro correcto");
-                } else {
-                    console.log("Error:" + response['createaccount']['message']);
-                }
-            })
-            .catch((err) => {
-                console.error('Petó algo', err);
-            });
-
+        return new Promise((resolve, reject) => {
+                createAccount(username, email, password, retype)
+                    .then((response) => {
+                        resolve(response['createaccount']['status']);
+                    })
+                    .catch((error) => {
+                        reject(error);
+                    });
+            }
+        );
     }
 }
 
@@ -55,11 +52,11 @@ function loginPromise(email: string, password: string) {
             let backslash = "%5C";
             let slash = "%2F";
             let colon = "%3A";
-            logintoken = logintoken.toString().substring(0, logintoken.toString().length - 2)+plus+backslash;
+            logintoken = logintoken.toString().substring(0, logintoken.toString().length - 2) + plus + backslash;
             let params = "username=" + email +
                 "&password=" + password +
                 "&logintoken=" + logintoken +
-                "&loginreturnurl=https"+colon+slash+slash+"www.mediawiki.org"+slash +
+                "&loginreturnurl=https" + colon + slash + slash + "www.mediawiki.org" + slash +
                 "&rememberMe=1";
             fetch('https://www.mediawiki.org/w/api.php?action=clientlogin&format=json',
                 {
@@ -86,13 +83,13 @@ function createAccount(username: string, email: string, password: string, retype
             let backslash = "%5C";
             let slash = "%2F";
             let colon = "%3A";
-            createaccounttoken = createaccounttoken.toString().substring(0, createaccounttoken.toString().length - 2)+plus+backslash;
+            createaccounttoken = createaccounttoken.toString().substring(0, createaccounttoken.toString().length - 2) + plus + backslash;
             let params = "username=" + username +
                 "&email=" + email +
                 "&password=" + password +
                 "&retype=" + retype +
                 "&createtoken=" + createaccounttoken +
-                "&createreturnurl=https"+colon+slash+slash+"www.mediawiki.org";
+                "&createreturnurl=https" + colon + slash + slash + "www.mediawiki.org";
             fetch('https://www.mediawiki.org/w/api.php?action=createaccount&format=json',
                 {
                     method: "POST",
@@ -115,7 +112,7 @@ function createAccount(username: string, email: string, password: string, retype
 //TODO cuando no tiene conexión, controlar el error del fetch
 function getToken(type: string) {
     return new Promise(function (resolve, reject) {
-        fetch('https://www.mediawiki.org/w/api.php?action=query&meta=tokens&type='+type+'&format=json')
+        fetch('https://www.mediawiki.org/w/api.php?action=query&meta=tokens&type=' + type + '&format=json')
             .then(function (response) {
                 if (response.status.toString() != "200") {
                     reject("Inténtelo más tarde");
@@ -126,7 +123,7 @@ function getToken(type: string) {
                 reject(err);
             })
             .then(function (myJson) {
-                resolve(myJson.query.tokens[type+'token']);
+                resolve(myJson.query.tokens[type + 'token']);
             });
     });
 }
