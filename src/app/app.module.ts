@@ -16,6 +16,7 @@ import {RegisterPage} from "../pages/register/register";
 
 import {Geolocation} from '@ionic-native/geolocation';
 import {MapPage} from "../pages/map/map";
+import {LoginPage} from "../pages/login/login";
 
 
 Pro.init('b1c54fce', {
@@ -51,7 +52,8 @@ export class MyErrorHandler implements ErrorHandler {
         HomePage,
         TabsPage,
         RegisterPage,
-        MapPage
+        MapPage,
+        LoginPage
     ],
     imports: [
         BrowserModule,
@@ -65,7 +67,8 @@ export class MyErrorHandler implements ErrorHandler {
         HomePage,
         TabsPage,
         RegisterPage,
-        MapPage
+        MapPage,
+        LoginPage
     ],
     providers: [
         StatusBar,
