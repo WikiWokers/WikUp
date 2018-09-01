@@ -3,6 +3,7 @@ import {NavController, ToastController} from 'ionic-angular';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {UserProvider} from "../../providers/user/user";
 import {RegisterPage} from "../register/register";
+import {TabsPage} from "../tabs/tabs";
 
 @Component({
     selector: 'page-login',
@@ -37,6 +38,7 @@ export class LoginPage {
         this.userProvider.login(this.username, this.password)
             .then(() => {
                 this.username = this.password = '';
+                this.navCtrl.setRoot(TabsPage);
             })
             .catch((error) => this.showWarning(error));
     }
