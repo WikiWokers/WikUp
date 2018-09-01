@@ -1,6 +1,6 @@
-import {NgModule, ErrorHandler, Injectable, Injector} from '@angular/core';
+import {ErrorHandler, Injectable, Injector, NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
-import {IonicApp, IonicModule, IonicErrorHandler} from 'ionic-angular';
+import {IonicApp, IonicErrorHandler, IonicModule} from 'ionic-angular';
 import {MyApp} from './app.component';
 
 import {AboutPage} from '../pages/about/about';
@@ -14,13 +14,13 @@ import {Pro} from "@ionic/pro";
 import {UserProvider} from '../providers/user/user';
 import {RegisterPage} from "../pages/register/register";
 
-import { Geolocation } from '@ionic-native/geolocation';
+import {Geolocation} from '@ionic-native/geolocation';
 import {MapPage} from "../pages/map/map";
 
 
 Pro.init('b1c54fce', {
     appVersion: '0.0.1'
-})
+});
 
 @Injectable()
 export class MyErrorHandler implements ErrorHandler {

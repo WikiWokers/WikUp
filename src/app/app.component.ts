@@ -22,8 +22,8 @@ export class MyApp {
             splashScreen.hide();
             // TODO this only redirect when open the app not after login
             userProvider.userID().then((ID) => {
-                if(ID == 0) this.rootPage = HomePage;
-                else this.rootPage = MapPage
+                if (ID == 0) this.rootPage = HomePage;
+                else this.rootPage = MapPage;
             });
         });
     }
