@@ -18,6 +18,7 @@ import {Geolocation} from '@ionic-native/geolocation';
 import {MapPage} from "../pages/map/map";
 import {LoginPage} from "../pages/login/login";
 import {InputValidatorProvider} from '../providers/input-validator/input-validator';
+import {Camera} from "@ionic-native/camera";
 
 
 Pro.init('b1c54fce', {
@@ -79,7 +80,8 @@ export class MyErrorHandler implements ErrorHandler {
         {provide: ErrorHandler, useClass: IonicErrorHandler},
         UserProvider,
         Geolocation,
-        InputValidatorProvider
+        InputValidatorProvider,
+        Camera
     ]
 })
 export class AppModule {
