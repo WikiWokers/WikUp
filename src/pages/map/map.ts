@@ -20,6 +20,10 @@ export class MapPage {
     }
 
     loadmap() {
+        //TODO delete an load the map all the time? Is not a good idea I think
+        if (this.map != undefined) {
+            this.map.remove();
+        }
         this.map = leaflet.map("map").fitWorld();
         leaflet.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attributions: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
