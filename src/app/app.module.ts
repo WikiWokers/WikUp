@@ -4,7 +4,7 @@ import {IonicApp, IonicErrorHandler, IonicModule} from 'ionic-angular';
 import {MyApp} from './app.component';
 
 import {ProfilePage} from '../pages/profile/profile';
-import {ContactPage} from '../pages/contact/contact';
+import {RankingPage} from '../pages/ranking/ranking';
 import {CameraPage} from '../pages/camera/camera';
 import {TabsPage} from '../pages/tabs/tabs';
 
@@ -49,7 +49,7 @@ export class MyErrorHandler implements ErrorHandler {
     declarations: [
         MyApp,
         ProfilePage,
-        ContactPage,
+        RankingPage,
         CameraPage,
         TabsPage,
         RegisterPage,
@@ -64,7 +64,7 @@ export class MyErrorHandler implements ErrorHandler {
     entryComponents: [
         MyApp,
         ProfilePage,
-        ContactPage,
+        RankingPage,
         CameraPage,
         TabsPage,
         RegisterPage,

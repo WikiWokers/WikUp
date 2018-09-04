@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {NavController} from "ionic-angular";
 
 @Component({
-    selector: 'camera',
+    selector: 'page-camera',
     templateUrl: 'camera.html'
 })
 export class CameraPage {
