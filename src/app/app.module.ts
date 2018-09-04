@@ -3,7 +3,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {IonicApp, IonicErrorHandler, IonicModule} from 'ionic-angular';
 import {MyApp} from './app.component';
 
-import {AboutPage} from '../pages/about/about';
+import {ProfilePage} from '../pages/profile/profile';
 import {ContactPage} from '../pages/contact/contact';
 import {CameraPage} from '../pages/camera/camera';
 import {TabsPage} from '../pages/tabs/tabs';
@@ -48,7 +48,7 @@ export class MyErrorHandler implements ErrorHandler {
 @NgModule({
     declarations: [
         MyApp,
-        AboutPage,
+        ProfilePage,
         ContactPage,
         CameraPage,
         TabsPage,
@@ -63,7 +63,7 @@ export class MyErrorHandler implements ErrorHandler {
     bootstrap: [IonicApp],
     entryComponents: [
         MyApp,
-        AboutPage,
+        ProfilePage,
         ContactPage,
         CameraPage,
         TabsPage,
