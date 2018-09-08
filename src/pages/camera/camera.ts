@@ -6,22 +6,25 @@ import {Camera} from "@ionic-native/camera";
     templateUrl: 'camera.html'
 })
 export class CameraPage {
+    cameraData: string;
+    photoTaken: boolean;
+    photoSelected: boolean;
+
     constructor(private camera: Camera) {
 
-        const options= {
-            quality: 100,
-            destinationType: this.camera.DestinationType.FILE_URI,
-            encodingType: this.camera.EncodingType.JPEG,
-            mediaType: this.camera.MediaType.PICTURE
+        let options = {
+            sourceType: camera.PictureSourceType.CAMERA,
+            destinationType: camera.DestinationType.DATA_URL,
+            encodingType: camera.EncodingType.JPEG,
+            mediaType: camera.MediaType.PICTURE
         };
-
-        this.camera.getPicture(options).then((imageData) => {
-            // imageData is either a base64 encoded string or a file URI
-            // If it's base64 (DATA_URL):
-            let base64Image = 'data:image/jpeg;base64,' + imageData;
-            console.log(base64Image);
+        camera.getPicture(options).then((imageData) => {
+            this.cameraData = 'data:image/jpeg;base64,' + imageData;
+            this.photoTaken = true;
+            this.photoSelected = false;
         }, (err) => {
-            console.error('Camera', err);
+            console.error('Camera error', err)
+
         });
     }
 }
