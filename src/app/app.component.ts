@@ -19,10 +19,16 @@ export class MyApp {
             // Here you can do any higher level native things you might need.
             statusBar.styleDefault();
             splashScreen.hide();
-            userProvider.userID().then((ID) => {
-                if (ID == 0) this.rootPage = LoginPage;
-                else this.rootPage = TabsPage;
-            });
+            userProvider
+                .userID()
+                .then((ID) => {
+                    if (ID == 0) this.rootPage = LoginPage;
+                    else this.rootPage = TabsPage;
+                })
+                .catch(error => {
+                    // todo redirect to error page
+                    console.error('Error user ID:', error);
+                });
         });
     }
 }
