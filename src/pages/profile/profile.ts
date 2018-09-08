@@ -18,9 +18,9 @@ export class ProfilePage {
             .info()
             .then(info => {
                 this.user = {
-                    email: info.email,
-                    registrationDay: new Date(info.registrationdate),
-                    name: info.name
+                    email: info['email'],
+                    registrationDay: new Date(info['registrationdate']),
+                    name: info['name']
                 };
             })
             .catch(error => {
