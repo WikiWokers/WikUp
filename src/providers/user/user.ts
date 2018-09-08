@@ -1,11 +1,9 @@
 import {Injectable} from '@angular/core';
-import {Pro} from "@ionic/pro";
 
 @Injectable()
 export class UserProvider {
 
     constructor() {
-        console.log('Hello UserProvider Provider');
     }
 
     userID() {
@@ -43,6 +41,21 @@ export class UserProvider {
             }
         );
     }
+
+    info() {
+        return new Promise((resolve, reject) => {
+            fetch('https://www.mediawiki.org/w/api.php?action=query&meta=userinfo&format=json&uiprop=blockinfo%7Chasmsg%7Cemail%7Crealname%7Cregistrationdate')
+                .then(response => {
+                    response.json().then(json => {
+                        resolve(json['query']['userinfo']);
+                    });
+                })
+                .catch(error => {
+                    reject(error);
+                });
+        });
+    }
+
 }
 
 function loginPromise(email: string, password: string) {
